@@ -1,6 +1,6 @@
 import 'dart:ui';
-import 'package:myapp/pages/Login/inicio_sesion.dart';
-import 'package:myapp/pages/Login/registro.dart';
+import 'package:myapp/pages/Login/login.dart';
+import 'package:myapp/pages/Login/register.dart';
 import 'package:myapp/styles/Styles.dart';
 import 'package:flutter/material.dart';
 
@@ -69,8 +69,7 @@ class InfoPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterSellerPage()),
+                        MaterialPageRoute(builder: (context) => RegisterPage()),
                       );
                       // Lógica para registrar tienda
                     },

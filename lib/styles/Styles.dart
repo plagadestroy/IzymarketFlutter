@@ -13,4 +13,4 @@ class AppColors {
 
 const String logoPrincipal = 'https://i.imgur.com/plkxCg5.png';
 const String logoMarket = 'https://i.imgur.com/R6wT0dR.png';
-const String logoIzy = 'https://i.imgur.com/plkxCg5.png';
+const String logoIzy = 'https://i.imgur.com/IXvECkE.png';
