@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/pages/Comprar/comprar.dart';
-import 'package:myapp/pages/Info/info.dart';
-import 'package:myapp/pages/Login/infoPage.dart';
+import 'package:myapp/pages/Login/login.page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart'; // Si usas Supabase
+import 'package:myapp/pages/Vender/form_screen.dart';
+import 'package:myapp/pages/Info/quienesSomos.dart';
 import 'package:myapp/styles/Styles.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,29 +15,45 @@ class _HomeScreenState extends State<HomeScreen> {
   Color _sellButtonColor = Colors.transparent;
   Color _buyButtonColor = Colors.transparent;
 
+  Future<void> _navigateToSellPage() async {
+    final session = Supabase.instance.client.auth.currentSession;
+
+    if (session != null) {
+      // Usuario con sesión activa, navegar al formulario
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FormTienda()),
+      );
+    } else {
+      // Usuario sin sesión activa, navegar a la página de información
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Image.network(
           logoPrincipal, // Cambia esto por la URL de tu logo
-          width: 200, // Ajusta el tamaño del logo aquí
+          width: 200,
           height: 80,
         ),
         centerTitle: true,
-        backgroundColor: Colors.black, // Cambia el color del AppBar si deseas
+        backgroundColor: Colors.black,
         actions: [
           TextButton(
             onPressed: () {
               // Navegar a la página "¿Quiénes somos?"
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        QuinesSomos()), 
+                MaterialPageRoute(builder: (context) => QuinesSomos()),
               );
             },
-            child: Text(
+            child: const Text(
               '¿Quiénes somos?',
               style: TextStyle(
                 color: Colors.white,
@@ -76,32 +93,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                     child: GestureDetector(
-                      onTap: () {
-                        // Navegar a la página de Vender
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => InfoPage()),
-                        );
-                      },
+                      onTap:
+                          _navigateToSellPage, // Usa la función para redirigir
                       child: AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         height: MediaQuery.of(context).size.height,
                         decoration: BoxDecoration(
                           color: _sellButtonColor,
                           shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.horizontal(
-                              left: Radius.circular(
-                                  15)), // Bordes redondeados a la izquierda
+                          borderRadius: const BorderRadius.horizontal(
+                            left: Radius.circular(15),
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.pink.withOpacity(0.3),
                               blurRadius: 10,
-                              offset: Offset(0, 5),
+                              offset: const Offset(0, 5),
                             ),
                           ],
                         ),
                         alignment: Alignment.center,
-                        child: Text(
+                        child: const Text(
                           'Vender',
                           style: TextStyle(
                             color: Colors.white,
@@ -111,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             shadows: [
                               Shadow(
                                 offset: Offset(0, 2),
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black,
                               ),
                             ],
                           ),
@@ -138,29 +150,28 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Navegar a la página de Comprar
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => CatalogScreen()),
+                          MaterialPageRoute(builder: (context) => FormTienda()),
                         );
                       },
                       child: AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         height: MediaQuery.of(context).size.height,
                         decoration: BoxDecoration(
                           color: _buyButtonColor,
                           shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.horizontal(
-                              right: Radius.circular(
-                                  15)), // Bordes redondeados a la derecha
+                          borderRadius: const BorderRadius.horizontal(
+                            right: Radius.circular(15),
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.blue.withOpacity(0.3),
                               blurRadius: 10,
-                              offset: Offset(0, 5),
+                              offset: const Offset(0, 5),
                             ),
                           ],
                         ),
                         alignment: Alignment.center,
-                        child: Text(
+                        child: const Text(
                           'Comprar',
                           style: TextStyle(
                             color: Colors.white,
@@ -170,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             shadows: [
                               Shadow(
                                 offset: Offset(0, 2),
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black,
                               ),
                             ],
                           ),

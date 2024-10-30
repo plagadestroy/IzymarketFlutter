@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/home_page.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
-  // Asegúrate de que los widgets se inicialicen antes de Firebase
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inicializa Firebase
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await dotenv.load(fileName: ".env");
 
+  String supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
+  String supabaseAnonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? '';
+
+  await Supabase.initialize(
+    url: supabaseUrl,
+    anonKey: supabaseAnonKey,
+  );
+  // Asegúra de que los widgets se inicialicen antes de Firebase
   // Ejecuta la aplicación
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

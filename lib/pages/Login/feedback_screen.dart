@@ -1,7 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/Vender/form_screen.dart';
 import 'package:myapp/styles/Styles.dart'; // Asegúrate de importar tus estilos
 
-class QuinesSomos extends StatelessWidget {
+class FeedbackLog extends StatefulWidget {
+  static const String routeName = '/FeedbackLog';
+
+  const FeedbackLog({Key? key}) : super(key: key);
+
+  @override
+  _FeedbackLogState createState() => _FeedbackLogState();
+}
+
+class _FeedbackLogState extends State<FeedbackLog> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                FormTienda()), // Redirige a la pantalla principal
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +39,7 @@ class QuinesSomos extends StatelessWidget {
         iconTheme:
             const IconThemeData(color: Color.fromARGB(255, 255, 255, 255)),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context); // Volver a la página anterior
           },
@@ -42,25 +65,27 @@ class QuinesSomos extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                      color: Colors.white.withOpacity(0.5), width: 1),
+                    color: Colors.white.withOpacity(0.5),
+                    width: 1,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
                       blurRadius: 10,
-                      offset: Offset(0, 5),
+                      offset: const Offset(0, 5),
                     ),
                   ],
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Información sobre IzyMarket',
+                      'Inicio Exitoso',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -68,25 +93,29 @@ class QuinesSomos extends StatelessWidget {
                         shadows: [
                           Shadow(
                             offset: Offset(0, 2),
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black54,
                           ),
                         ],
                       ),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 20),
-                    Text(
-                      'IzyMarket es un marketplace diseñado para ayudar a las pequeñas empresas a digitalizarse y mejorar su visibilidad. Ofrecemos una plataforma donde los usuarios pueden comprar y vender productos de manera fácil y eficiente.',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        height: 1.5,
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      child: Text(
+                        'Gracias por unirte a nosotros. ¡Comienza a vender en IziMarket!',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          height: 1.5,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 20),
                     Text(
-                      '¡Únete a nosotros y descubre una nueva forma de comprar y vender!',
+                      'IziMarket es un marketplace diseñado para ayudar a las pequeñas empresas a digitalizarse y mejorar su visibilidad.',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

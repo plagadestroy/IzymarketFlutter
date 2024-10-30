@@ -1,8 +1,7 @@
 import 'dart:ui';
-import 'package:myapp/pages/Login/login.dart';
-import 'package:myapp/pages/Login/register.dart';
-import 'package:myapp/styles/Styles.dart';
+import 'package:myapp/pages/Login/login.page.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/styles/Styles.dart';
 
 class InfoPage extends StatelessWidget {
   @override
@@ -11,7 +10,10 @@ class InfoPage extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFa18cd1), Color(0xFFfbc2eb)],
+            colors: [
+              Color.fromARGB(255, 121, 64, 255),
+              Color.fromARGB(255, 250, 122, 214)
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -19,27 +21,24 @@ class InfoPage extends StatelessWidget {
         child: Center(
           child: GlassmorphicCard(
             child: Padding(
-              padding: const EdgeInsets.all(30.0), // Ajuste de padding
+              padding: const EdgeInsets.all(30.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Espacio para la imagen
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Image.network(
-                      logoPrincipal,
-                      height: 200.0, // Aumentamos el tamaño de la imagen
+                      logoPrincipal, // Reemplaza con tu logo
+                      height: 200.0,
                       width: double.infinity,
                       fit: BoxFit.contain,
                     ),
                   ),
-                  const SizedBox(height: 0.5),
-                  // Texto informativo con borde y estilo moderno
+                  const SizedBox(height: 20.0),
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: Colors.white.withOpacity(0.8),
-                          width: 3.0), // Bordes más gruesos
+                          color: Colors.white.withOpacity(0.8), width: 3.0),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     padding: const EdgeInsets.all(15.0),
@@ -49,7 +48,7 @@ class InfoPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 255, 255, 255),
                         shadows: [
                           Shadow(
                             color: Colors.black45,
@@ -62,29 +61,15 @@ class InfoPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40.0),
-                  // Botón de "Registrar Tienda" con estilo moderno
                   AnimatedButton(
-                    text: 'Registrar Tienda',
+                    text: 'Iniciar Sesion',
                     color: const Color(0xFF00A8E8),
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()),
                       );
-                      // Lógica para registrar tienda
-                    },
-                  ),
-                  const SizedBox(height: 25.0),
-                  // Botón de "Iniciar Sesión" con estilo moderno
-                  AnimatedButton(
-                    text: 'Iniciar Sesión',
-                    color: const Color(0xFFFF4081),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      );
-                      // Lógica para iniciar sesión
                     },
                   ),
                 ],
@@ -100,7 +85,7 @@ class InfoPage extends StatelessWidget {
 class GlassmorphicCard extends StatelessWidget {
   final Widget child;
 
-  GlassmorphicCard({required this.child});
+  const GlassmorphicCard({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +93,8 @@ class GlassmorphicCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.0),
         border: Border.all(
-          color: Colors.white.withOpacity(0.3), // Borde más visible
-          width: 3.0,
+          color: Colors.white.withOpacity(0.3),
+          width: 4.0,
         ),
       ),
       child: ClipRRect(
@@ -135,7 +120,7 @@ class AnimatedButton extends StatelessWidget {
   final Color color;
   final VoidCallback onPressed;
 
-  AnimatedButton({
+  const AnimatedButton({
     required this.text,
     required this.color,
     required this.onPressed,
@@ -145,11 +130,10 @@ class AnimatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-            vertical: 20.0, horizontal: 40.0), // Botones más grandes
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
         backgroundColor: color,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40.0), // Bordes más redondeados
+          borderRadius: BorderRadius.circular(40.0),
         ),
         elevation: 12,
         shadowColor: Colors.black38,
@@ -159,7 +143,7 @@ class AnimatedButton extends StatelessWidget {
         text,
         style: const TextStyle(
           color: Colors.white,
-          fontSize: 20.0, // Aumentamos el tamaño de la letra
+          fontSize: 20.0,
           fontWeight: FontWeight.bold,
         ),
       ),
